@@ -65,6 +65,12 @@ def remove(lst, key):
     return filter(lst, lambda cmp: cmp == key)
 
 
+def ordered(lst, key):
+    """Insert in a list maintaining its natural order."""
+    return cons(key, lst) if lst is None or key < car(lst) else \
+        cons(car(lst), ordered(cdr(lst), key))
+
+
 #
 # Implementacao de uma interface orientada a objetos,
 # com processamento de stream, para a lista encadeada.
@@ -113,3 +119,11 @@ if __name__ == "__main__":
         .print()\
         .remove("Rafael")\
         .print()
+
+    ll = ordered(None, "Rafael")
+    ll = ordered(ll, "Gustavo")
+    ll = ordered(ll, "Bryan")
+    ll = ordered(ll, "Roberto")
+    ll = ordered(ll, "Marcelo")
+    ll = ordered(ll, "Ivonei")
+    print(ll)
