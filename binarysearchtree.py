@@ -28,11 +28,10 @@ def insert(bst, key):
         else (left(bst), key(bst), insert(right(bst), key))
 
 
-def search(bst, key):
+def search(bst, k):
     """Search for a KEY in the binary search tree BST."""
-    return None if bst is None else \
-        key(bst) if key == key(bst) else \
-        search(left(bst), key) if key < key(bst) else search(right(bst), key)
+    return None if bst is None else key(bst) if k == key(bst) else \
+        search(left(bst) if k < key(bst) else right(bst), key)
 
 
 def max(bst):
