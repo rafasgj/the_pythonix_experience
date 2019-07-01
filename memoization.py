@@ -16,7 +16,7 @@ def memoize(fn):
 def fibonacci(n):
     return 0 if n == 0 \
         else 1 if n == 1 \
-            else fibonacci(n - 2) + fibonacci(n - 1)
+        else fibonacci(n - 2) + fibonacci(n - 1)
 
 
 if __name__ == "__main__":
