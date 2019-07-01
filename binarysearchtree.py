@@ -1,32 +1,65 @@
-"""Impements a binary search tree with one line methods."""
+"""Implements a Binary Search Tree using one line functions."""
+
+from collections import namedtuple
+
+
+_bst_node = namedtuple("bst_node", "left right key")
 
 
 def left(node):
-    """Retrieve the left node of a binary tree node."""
+    """Get the left element of a BST node."""
     return node[0]
 
 
 def right(node):
-    """Retrieve the right node of a binary tree node."""
+    """Get the right element of a BST node."""
     return node[2]
 
 
 def key(node):
-    """Retrieve the key value of a binary tree node."""
+    """Get the key element of a BST node."""
     return node[1]
 
 
 def insert(bst, k):
-    """Insert a key in a Binary Search Tree."""
-    return (None, k, None) if bst is None \
-        else (insert(left(bst), k), key(bst), right(bst)) if k < key(bst) \
+    """Insert KEY in the binary search tree BST."""
+    return (None, k, None) if bst is None else \
+        (insert(left(bst), k), key(bst), right(bst)) if k <= key(bst) \
         else (left(bst), key(bst), insert(right(bst), k))
 
 
 def search(bst, k):
-    return None if bst is None else bst if k == key(bst) \
-        else search(left(bst), k) if k < key(bst) \
-        else search(right(bst), k)
+    """Search for a KEY in the binary search tree BST."""
+    return None if bst is None else key(bst) if k == key(bst) else \
+        search(left(bst) if k < key(bst) else right(bst), k)
+
+
+def max(bst):
+    """Retrieve the maximum value of the binary search tree BST."""
+    return key(bst) if right(bst) is None else max(right(bst))
+
+
+def min(bst):
+    """Retrieve the minimum value of the binary search tree BST."""
+    return key(bst) if left(bst) is None else min(left(bst))
+
+
+def repr(bst):
+    """Get a string represenation of the binary search tree BST."""
+    return "_" if bst is None \
+        else "({} {} {})".format(bst.key, repr(bst.left), repr(bst.right))
+
+
+def remove(bst, key):
+    """Remove a node with the given key."""
+    return None if bst is None else \
+        None if left(bst) is None and right(bst) is None else \
+        right(bst) if left(bst) is None and key == key(bst) else \
+        left(bst) if right(bst) is None and key == key(bst) else \
+        (left(bst), min(right(bst)), remove(right(bst), min(right(bst)))) \
+        if key == key(bst) else \
+        (remove(left(bst), key), key(bst), right(bst)) \
+        if key < key(bst) else (left(bst), key(bst), remove(right(bst), key))
 
 
 def preorder(bst, fn):

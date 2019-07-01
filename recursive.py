@@ -12,7 +12,7 @@ def fibonacci_iterativo(n):
     return f1
 
 
-def fibonacci_recursivo(n) :
+def fibonacci_recursivo(n):
     """Calcula o n-esimo numero de Fibonacci, iterativamente."""
     return 0 if n == 0 \
         else 1 if n == 1 \

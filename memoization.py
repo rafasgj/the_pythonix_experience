@@ -14,6 +14,7 @@ def memoize(fn):
 
 @memoize
 def fibonacci(n):
+    """Implement the n-th Fibonacci number, recursively, with memoization."""
     return 0 if n == 0 \
         else 1 if n == 1 \
         else fibonacci(n - 2) + fibonacci(n - 1)
